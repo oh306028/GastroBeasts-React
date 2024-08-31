@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0px;
+  background-color: hsl(262, 43%, 19%);
+}
+
+img {
+  width: 520px;
+  height: 650px;
+  border-radius: 20px;
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  margin-top: 90px;
+}
