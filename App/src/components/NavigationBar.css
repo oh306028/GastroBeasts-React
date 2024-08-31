@@ -1,0 +1,32 @@
+.nav-bar {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: hsl(263, 28%, 24%);
+  color: white;
+  border: 0.25px solid black;
+  align-items: center;
+  font-size: 16px;
+}
+
+.nav-bar p {
+  padding: 5px 30px 5px 30px;
+}
+
+.nav-info {
+  display: flex;
+  align-items: center;
+}
+
+.nav-info P {
+  padding: 0px 17px 0px 17px;
+}
+
+.nav-bar p:hover {
+  color: hsl(262, 43%, 19%);
+  cursor: pointer;
+  transition: ease 0.55s;
+}
