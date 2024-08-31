@@ -1,4 +1,9 @@
+import React, { useState } from "react";
+import "./RestaurantList.css";
+
 export const RestaurantList = ({ data }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   const GetCategories = (categories) => {
     return (
       <>
@@ -26,23 +31,29 @@ export const RestaurantList = ({ data }) => {
   const CreateListItem = () => {
     return (
       <>
-        {data.map((r) => (
+        {data.map((r, index) => (
           <li key={r.id}>
             <h3>{r.name}</h3>
             {GetCategories(r.categories)}
             <p>{r.description}</p>
-            Reviews:
-            {GetReviews(r.reviews)}
+            <button onClick={() => handleButtonClick(index)}>
+              Get reviews
+            </button>
+            {activeIndex === index && GetReviews(r.reviews)}
           </li>
         ))}
       </>
     );
   };
 
+  const handleButtonClick = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <>
       <ul>
-        <CreateListItem></CreateListItem>
+        <CreateListItem />
       </ul>
     </>
   );
