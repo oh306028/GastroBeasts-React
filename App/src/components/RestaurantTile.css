@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 350px;
+  width: 650px;
+  background-color: rgb(245, 235, 235);
+  margin-left: 300px;
+  border-radius: 11px;
+  -webkit-box-shadow: 4px 11px 31px 4px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 4px 11px 31px 4px rgba(66, 68, 90, 1);
+  box-shadow: 4px 11px 31px 4px rgba(66, 68, 90, 1);
+  color: black;
+}
+
+.categories-list {
+  color: black;
+  padding-left: 0;
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.categories-list li h5 {
+  margin-left: 8px;
+  margin-top: 1px;
+  margin-bottom: 5px;
+}
+
+.container p {
+  margin-top: 5px;
+}
+
+.container h1 {
+  margin-bottom: 0;
+}
+
+.reviews-list {
+  padding: 0;
+}
+
+.reviews-list li {
+  color: black;
+  list-style: none;
+}
+
+.container button {
+  border-radius: 5px;
+  border: 1px solid black;
+  color: white;
+  background-color: rgb(168, 107, 226);
+}
+
+.container button:hover {
+  cursor: pointer;
+  background-color: rgb(162, 82, 238);
+  transition: 0.3s ease;
+}
+
+.beast {
+  position: absolute;
+  right: 580px;
+  top: 210px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
