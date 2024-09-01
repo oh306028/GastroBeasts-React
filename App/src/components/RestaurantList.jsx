@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./RestaurantList.css";
 
-export const RestaurantList = ({ data }) => {
+export const RestaurantList = (props) => {
   const [activeIndex, setActiveIndex] = useState(null);
+
+  const data = props.data;
 
   const GetCategories = (categories) => {
     return (
@@ -36,8 +38,9 @@ export const RestaurantList = ({ data }) => {
             <h3>{r.name}</h3>
             {GetCategories(r.categories)}
             <p>{r.description}</p>
+
             <button onClick={() => handleButtonClick(index)}>
-              Get reviews
+              {activeIndex !== index ? "GetReviews" : "HideReviews"}
             </button>
             {activeIndex === index && GetReviews(r.reviews)}
           </li>
