@@ -26,7 +26,7 @@
 }
 
 .nav-bar p:hover {
-  color: hsl(262, 43%, 19%);
+  color: hsl(261, 26%, 47%);
   cursor: pointer;
-  transition: ease 0.55s;
+  transition: ease 0.2s;
 }
