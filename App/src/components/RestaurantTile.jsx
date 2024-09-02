@@ -3,39 +3,45 @@ import "./RestaurantTile.css";
 import placesImage from "../assets/places.png";
 
 export const RestaurantTile = () => {
-  const [restaurant, setRestaurant] = useState([]);
+  const [restaurantData, setRestaurantData] = useState([]);
+  const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:5194/api/restaurants/all");
       const result = await response.json();
 
-      setRestaurant(result);
+      setRestaurantData(result);
+      setRestaurant(generateRandomBest(result));
     };
     fetchData();
   }, []);
 
+  const handleReset = () => {
+    setRestaurant(generateRandomBest(restaurantData));
+  };
+
   return (
     <>
-      <CreateTile data={restaurant} />
+      <CreateTile restaurant={restaurant} handleReset={handleReset} />
     </>
   );
 };
 
-const GetCategories = (categories) => {
+const GetCategories = ({ categories }) => {
   return (
     <>
       {categories.map((category) => (
         <li key={category.id}>
           {" "}
-          <h5 key={category.id}>{category.name}</h5>
+          <h5>{category.name}</h5>
         </li>
       ))}
     </>
   );
 };
 
-const GetReviews = (reviews) => {
+const GetReviews = ({ reviews }) => {
   return (
     <>
       <ul>
@@ -52,7 +58,6 @@ const GetReviews = (reviews) => {
 const generateRandomBest = (data) => {
   const ids = data.map((i) => i.id);
   const idsCount = ids.length;
-  console.log(idsCount);
 
   const randomId = Math.floor(Math.random() * idsCount);
 
@@ -61,47 +66,27 @@ const generateRandomBest = (data) => {
   return restaurant;
 };
 
-const CreateTile = ({ data }) => {
-  const [visible, setVisible] = useState(false);
-
-  const handleVisible = () => {
-    setVisible(!visible);
-  };
-
-  const generateReviews = () => {
-    return <ul className="reviews-list">{GetReviews(restaurant.reviews)}</ul>;
-  };
-
-  if (data.length === 0) {
+const CreateTile = ({ restaurant, handleReset }) => {
+  if (!restaurant) {
     return <div>No data available</div>;
   }
-
-  const restaurant = generateRandomBest(data);
 
   return (
     <>
       <div className="content-container">
         <img src={placesImage} alt="Places" />
         <div className="randomBeast-container">
-          <p className="beast">Today's Beast!</p>
+          <p className="beast">Random Beast</p>
           <div className="container">
             <h1>"{restaurant.name}"</h1>
             <ul className="categories-list">
-              {GetCategories(restaurant.categories)}
+              <GetCategories categories={restaurant.categories} />
             </ul>
             <p>{restaurant.description}</p>
-            <div className="reviews-container">
-              <button onClick={handleVisible}>
-                {visible ? "Hide reviews" : "Show reviews"}
-              </button>
-              {!visible && (
-                <>
-                  <p>({Object.keys(restaurant.reviews).length})</p>
-                </>
-              )}
-            </div>
-            {visible && generateReviews()}
           </div>
+          <button onClick={handleReset} className="refresh">
+            Refresh
+          </button>
         </div>
       </div>
     </>

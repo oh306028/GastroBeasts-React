@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 350px;
+  height: 250px;
   width: 650px;
   background-color: rgb(245, 235, 235);
   margin-left: 300px;
@@ -66,6 +66,23 @@
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.refresh {
+  margin-left: 300px;
+  margin-top: 30px;
+  font-size: 25px;
+  border: 2px solid black;
+  border-radius: 10px;
+  color: white;
+  background-color: hsl(263, 28%, 24%);
+  padding: 10px;
+}
+
+.refresh:hover {
+  cursor: pointer;
+  background-color: hsl(262, 25%, 43%);
+  transition: 0.28s ease;
 }
 
 .randomBeast-container {
