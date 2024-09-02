@@ -9,6 +9,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 10px;
+  margin-right: 345px;
 }
 
 .register-form input {
@@ -34,9 +35,13 @@
   margin-top: 3px;
 }
 
-.register-form .name {
+.register-form .password {
   width: 183px;
-  margin-right: 3px;
+  margin-right: 5px;
+}
+
+.register-form .rightPassword {
+  width: 183px;
 }
 
 .submit:hover {
@@ -48,7 +53,7 @@
 .register-page-container {
   display: flex;
   margin-top: 100px;
-  margin-right: 100px;
+  margin-left: 100px;
 }
 
 .register-page-container img {

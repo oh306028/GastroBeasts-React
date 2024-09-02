@@ -6,6 +6,7 @@ export const Register = () => {
   return (
     <>
       <div className="register-page-container">
+        <img src={food} />
         <div className="register-container">
           <form className="register-form">
             <input type="text" placeholder="Nick name"></input>
@@ -13,13 +14,13 @@ export const Register = () => {
             <input type="text" placeholder="Email"></input>
 
             <input
-              className="name"
+              className="password"
               type="password"
               placeholder="Password"
             ></input>
 
             <input
-              className="name"
+              className="rightPassword"
               type="password"
               placeholder="Confirm password"
             ></input>
@@ -30,7 +31,6 @@ export const Register = () => {
             <Link to="/login">Have account?</Link>
           </form>
         </div>
-        <img src={food} />
       </div>
     </>
   );
