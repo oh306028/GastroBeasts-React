@@ -19,7 +19,9 @@ export const NavigationBar = () => {
           <p>CONTACT</p>
         </Link>
       </div>
-      <p>ACCOUNT</p>
+      <Link to="/login">
+        <p>SIGN IN</p>
+      </Link>
     </div>
   );
 };
