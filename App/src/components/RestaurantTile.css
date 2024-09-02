@@ -61,10 +61,15 @@
 }
 
 .beast {
-  position: absolute;
-  right: 580px;
-  top: 210px;
+  margin-left: 300px;
   color: white;
   font-size: 40px;
   font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.randomBeast-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

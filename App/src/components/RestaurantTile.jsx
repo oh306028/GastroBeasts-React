@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./RestaurantTile.css";
+import placesImage from "../assets/places.png";
 
 export const RestaurantTile = () => {
   const [restaurant, setRestaurant] = useState([]);
@@ -25,7 +26,7 @@ const GetCategories = (categories) => {
   return (
     <>
       {categories.map((category) => (
-        <li>
+        <li key={category.id}>
           {" "}
           <h5 key={category.id}>{category.name}</h5>
         </li>
@@ -48,6 +49,18 @@ const GetReviews = (reviews) => {
   );
 };
 
+const generateRandomBest = (data) => {
+  const ids = data.map((i) => i.id);
+  const idsCount = ids.length;
+  console.log(idsCount);
+
+  const randomId = Math.floor(Math.random() * idsCount);
+
+  const restaurant = data.filter((i) => i.id === ids[randomId])[0];
+
+  return restaurant;
+};
+
 const CreateTile = ({ data }) => {
   const [visible, setVisible] = useState(false);
 
@@ -63,29 +76,33 @@ const CreateTile = ({ data }) => {
     return <div>No data available</div>;
   }
 
-  const restaurant = data[0];
-  console.log(restaurant);
+  const restaurant = generateRandomBest(data);
 
   return (
     <>
-      <p className="beast">Today's Beast!</p>
-      <div className="container">
-        <h1>"{restaurant.name}"</h1>
-        <ul className="categories-list">
-          {GetCategories(restaurant.categories)}
-        </ul>
-        <p>{restaurant.description}</p>
-        <div className="reviews-container">
-          <button onClick={handleVisible}>
-            {visible ? "Hide reviews" : "Show reviews"}
-          </button>
-          {!visible && (
-            <>
-              <p>({Object.keys(restaurant.reviews).length})</p>
-            </>
-          )}
+      <div className="content-container">
+        <img src={placesImage} alt="Places" />
+        <div className="randomBeast-container">
+          <p className="beast">Today's Beast!</p>
+          <div className="container">
+            <h1>"{restaurant.name}"</h1>
+            <ul className="categories-list">
+              {GetCategories(restaurant.categories)}
+            </ul>
+            <p>{restaurant.description}</p>
+            <div className="reviews-container">
+              <button onClick={handleVisible}>
+                {visible ? "Hide reviews" : "Show reviews"}
+              </button>
+              {!visible && (
+                <>
+                  <p>({Object.keys(restaurant.reviews).length})</p>
+                </>
+              )}
+            </div>
+            {visible && generateReviews()}
+          </div>
         </div>
-        {visible && generateReviews()}
       </div>
     </>
   );
