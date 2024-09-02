@@ -30,3 +30,8 @@
   cursor: pointer;
   transition: ease 0.2s;
 }
+
+.nav-bar a {
+  text-decoration: none;
+  color: inherit;
+}
