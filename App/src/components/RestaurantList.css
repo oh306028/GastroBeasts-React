@@ -1,7 +1,40 @@
 .beast-list-container {
-  margin-top: 60px;
+  margin-top: 80px;
   margin-left: 180px;
   margin-right: 15px;
+}
+
+.user-usage-container {
+  margin-left: 180px;
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.user-usage-container input {
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-right: 700px;
+  width: 400px;
+}
+
+.user-usage-container button {
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+  border: 1px solid black;
+  color: white;
+  background-color: hsl(263, 28%, 24%);
+}
+
+.user-usage-container button:hover {
+  background-color: hsl(263, 30%, 39%);
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .beast-list-container ul {
@@ -16,11 +49,11 @@
   margin-top: 62px;
 }
 
-.beast-tiles-list li {
+.beast-tiles-list > li {
   width: 25%;
   gap: 10px;
   margin-right: 15px;
-  background-color: white;
+  background-color: rgb(245, 235, 235);
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -54,10 +87,58 @@
 
 .list-categories-container li {
   border: none;
-  margin-right: 0;
+  margin-left: 8px;
+  margin-top: 1px;
+  margin-bottom: 5px;
   padding: 0;
 }
 
 .list-categories-container {
   padding: 0;
+  justify-content: center;
+}
+
+.list-categories-container h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.title {
+  margin-bottom: 5px;
+}
+
+.address-container {
+  padding: 0;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.address-container li {
+  margin-right: 5px;
+}
+
+.address-container h4 {
+  margin-top: 14px;
+  margin-bottom: 5px;
+}
+
+.navigationImg {
+  height: 25px;
+  width: 25px;
+  margin: 0;
+  margin-top: 9px;
+}
+
+.descr {
+  font-family: sans-serif;
+  font-size: 15px;
+  padding: 0px 8px 0px 8px;
+}
+
+.avg {
+  font-family: Geneva;
+}
+
+h1 {
+  font-family: fantasy;
 }
