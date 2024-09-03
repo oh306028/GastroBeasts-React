@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./RestaurantTile.css";
 import placesImage from "../assets/homeFood.png";
 import { Link } from "react-router-dom";
+import { RenderAverageStars } from "./RestaurantsList";
 
 export const RestaurantTile = () => {
   const [restaurantData, setRestaurantData] = useState([]);
@@ -29,7 +30,7 @@ export const RestaurantTile = () => {
   );
 };
 
-const GetCategories = ({ categories }) => {
+export const GetCategories = ({ categories }) => {
   return (
     <>
       {categories.map((category) => (
@@ -86,6 +87,7 @@ const CreateTile = ({ restaurant, handleReset }) => {
               <GetCategories categories={restaurant.categories} />
             </ul>
             <p>{restaurant.description}</p>
+            <RenderAverageStars reviews={restaurant.reviews} />
           </div>
           <button onClick={handleReset} className="refresh">
             Refresh
