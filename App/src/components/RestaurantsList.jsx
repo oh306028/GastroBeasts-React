@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./RestaurantList.css";
 import { GetCategories } from "./RestaurantTile";
+import navigationImg from "../assets/navigation.png";
 
 export const RenderAverageStars = ({ reviews }) => {
   if (!Array.isArray(reviews) || reviews.length === 0) {
@@ -13,7 +14,7 @@ export const RenderAverageStars = ({ reviews }) => {
 
   return (
     <>
-      <p>Avg Stars: {avgStars.toFixed(1)}</p>
+      <p className="avg">Avg Stars: {avgStars.toFixed(1)}</p>
     </>
   );
 };
@@ -38,15 +39,26 @@ export const RestaurantList = () => {
         {restaurants.map((r) => (
           <li key={r.id}>
             <div className="list-elements-container">
-              <h1>"{r.name}"</h1>
+              <h1 className="title">{r.name}</h1>
               <ul className="list-categories-container">
                 <GetCategories categories={r.categories} />
               </ul>
 
-              <h3>{r.address.city}</h3>
-              <h3>{r.address.street}</h3>
-              <h3>{r.address.number}</h3>
-              <p>{r.description}</p>
+              <ul className="address-container">
+                <li>
+                  <img className="navigationImg" src={navigationImg} />
+                </li>
+                <li>
+                  <h4>{r.address.city},</h4>
+                </li>
+                <li>
+                  <h4>{r.address.street}</h4>
+                </li>
+                <li>
+                  <h4>{r.address.number}</h4>
+                </li>
+              </ul>
+              <p className="descr">{r.description}</p>
               <RenderAverageStars reviews={r.reviews} />
             </div>
           </li>
@@ -98,6 +110,10 @@ export const RestaurantList = () => {
         </div>
 
         <div className="beast-list-container">
+          <div className="user-usage-container">
+            <input type="text" placeholder="Search a phrase..."></input>
+            <button>NEW BEAST</button>
+          </div>
           <ul className="beast-tiles-list">
             <RenderRestaurantTile />
           </ul>
