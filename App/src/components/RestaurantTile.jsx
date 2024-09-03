@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./RestaurantTile.css";
-import placesImage from "../assets/places.png";
+import placesImage from "../assets/homeFood.png";
+import { Link } from "react-router-dom";
 
 export const RestaurantTile = () => {
   const [restaurantData, setRestaurantData] = useState([]);
@@ -74,7 +75,9 @@ const CreateTile = ({ restaurant, handleReset }) => {
   return (
     <>
       <div className="content-container">
-        <img src={placesImage} alt="Places" />
+        <Link to="/gastroInfo">
+          <img src={placesImage} alt="Places" />
+        </Link>
         <div className="randomBeast-container">
           <p className="beast">Random Beast</p>
           <div className="container">
