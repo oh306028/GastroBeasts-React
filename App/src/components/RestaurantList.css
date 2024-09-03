@@ -1,2 +1,63 @@
 .beast-list-container {
+  margin-top: 60px;
+  margin-left: 180px;
+  margin-right: 15px;
+}
+
+.beast-list-container ul {
+  list-style: none;
+  display: flex;
+  flex: wrap;
+  text-align: center;
+}
+
+.beast-page-container {
+  display: flex;
+  margin-top: 62px;
+}
+
+.beast-tiles-list li {
+  width: 25%;
+  gap: 10px;
+  margin-right: 15px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.categories-list-menu {
+  position: fixed;
+  margin-right: 350px;
+  height: 900px;
+  width: 150px;
+  background-color: hsl(263, 28%, 24%);
+  text-align: center;
+  padding: 5px;
+  border: 1px solid black;
+  border-top: 0;
+  color: white;
+}
+
+.categories-list-menu ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.categories-list-menu h1 {
+  margin-bottom: 3px;
+}
+
+.categories-list-menu li {
+  margin: 10px;
+}
+
+.list-categories-container li {
+  border: none;
+  margin-right: 0;
+  padding: 0;
+}
+
+.list-categories-container {
+  padding: 0;
 }
