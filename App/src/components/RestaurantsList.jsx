@@ -21,6 +21,9 @@ export const RenderAverageStars = ({ reviews }) => {
 
 export const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [restaurantName, setRestaurantName] = useState("");
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,16 +31,27 @@ export const RestaurantList = () => {
       const result = await response.json();
 
       setRestaurants(result);
+      setFilteredRestaurants(result);
       console.log(result);
     };
     fetchData();
   }, []);
 
+  const handleInput = (e) => {
+    const inputValue = e.target.value.trim();
+    setRestaurantName(inputValue);
+    setFilteredRestaurants(
+      restaurants.filter((r) =>
+        r.name.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
+  };
+
   const RenderRestaurantTile = () => {
     return (
       <>
-        {restaurants.map((r) => (
-          <li key={r.id}>
+        {filteredRestaurants.map((r) => (
+          <li className="beast-tile" key={r.id}>
             <div className="list-elements-container">
               <h1 className="title">{r.name}</h1>
               <ul className="list-categories-container">
@@ -67,6 +81,25 @@ export const RestaurantList = () => {
     );
   };
 
+  const handleCategoryFilter = (e) => {
+    const categoryFilterValue = e.target.innerText;
+    let filtered;
+
+    setIsClicked(!isClicked);
+
+    if (isClicked) {
+      e.target.classList.add("clickedCategory");
+      filtered = restaurants.filter((r) =>
+        r.categories.some((c) => c.name.includes(categoryFilterValue))
+      );
+    } else {
+      e.target.classList.remove("clickedCategory");
+      filtered = restaurants;
+    }
+    console.log(e);
+    setFilteredRestaurants(filtered);
+  };
+
   const GenerateAllCategories = () => {
     const [categories, setCategories] = useState([]);
 
@@ -84,7 +117,9 @@ export const RestaurantList = () => {
     return (
       <>
         {categories.map((c) => (
-          <li key={c.id}>{c.name}</li>
+          <li onClick={handleCategoryFilter} className="category-el" key={c.id}>
+            {c.name}
+          </li>
         ))}
       </>
     );
@@ -111,7 +146,12 @@ export const RestaurantList = () => {
 
         <div className="beast-list-container">
           <div className="user-usage-container">
-            <input type="text" placeholder="Search a phrase..."></input>
+            <input
+              onChange={handleInput}
+              value={restaurantName}
+              type="text"
+              placeholder="Search a phrase..."
+            ></input>
             <button>NEW BEAST</button>
           </div>
           <ul className="beast-tiles-list">

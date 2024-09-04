@@ -151,3 +151,12 @@ h1 {
   transition: 0.1s ease;
   cursor: pointer;
 }
+
+.category-el:hover {
+  cursor: pointer;
+  color: hsl(260, 51%, 20%);
+}
+
+.clickedCategory {
+  color: goldenrod;
+}
