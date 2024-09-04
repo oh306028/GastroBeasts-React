@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./RestaurantList.css";
 import { GetCategories } from "./RestaurantTile";
 import navigationImg from "../assets/navigation.png";
+import { Link } from "react-router-dom";
 
 export const RenderAverageStars = ({ reviews }) => {
   if (!Array.isArray(reviews) || reviews.length === 0) {
@@ -52,29 +53,35 @@ export const RestaurantList = () => {
       <>
         {filteredRestaurants.map((r) => (
           <li className="beast-tile" key={r.id}>
-            <div className="list-elements-container">
-              <h1 className="title">{r.name}</h1>
-              <ul className="list-categories-container">
-                <GetCategories categories={r.categories} />
-              </ul>
+            <Link
+              className="linkDetails"
+              to={`/beasts/${r.name}/details`}
+              state={{ restaurant: r }}
+            >
+              <div className="list-elements-container">
+                <h1 className="title">{r.name}</h1>
+                <ul className="list-categories-container">
+                  <GetCategories categories={r.categories} />
+                </ul>
 
-              <ul className="address-container">
-                <li>
-                  <img className="navigationImg" src={navigationImg} />
-                </li>
-                <li>
-                  <h4>{r.address.city},</h4>
-                </li>
-                <li>
-                  <h4>{r.address.street}</h4>
-                </li>
-                <li>
-                  <h4>{r.address.number}</h4>
-                </li>
-              </ul>
-              <p className="descr">{r.description}</p>
-              <RenderAverageStars reviews={r.reviews} />
-            </div>
+                <ul className="address-container">
+                  <li>
+                    <img className="navigationImg" src={navigationImg} />
+                  </li>
+                  <li>
+                    <h4>{r.address.city},</h4>
+                  </li>
+                  <li>
+                    <h4>{r.address.street}</h4>
+                  </li>
+                  <li>
+                    <h4>{r.address.number}</h4>
+                  </li>
+                </ul>
+                <p className="descr">{r.description}</p>
+                <RenderAverageStars reviews={r.reviews} />
+              </div>
+            </Link>
           </li>
         ))}
       </>
