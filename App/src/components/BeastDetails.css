@@ -34,6 +34,7 @@
   width: 100%;
   height: 200px;
   text-align: center;
+  overflow-y: scroll;
 }
 
 .reviews-container li {
@@ -75,4 +76,19 @@
 .vertical-line {
   border: 1px solid black;
   margin-left: 25px;
+}
+
+.revieved-data-container {
+  display: flex;
+  justify-content: center;
+}
+
+.revieved-data-container h5 {
+  margin-left: 10px;
+}
+
+.revieved-data-container h5,
+h4 {
+  margin-bottom: 0;
+  margin-top: 0;
 }
