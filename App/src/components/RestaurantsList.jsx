@@ -103,6 +103,7 @@ export const RestaurantList = () => {
       e.target.classList.remove("clickedCategory");
       filtered = restaurants;
     }
+    setIsClicked(!isClicked);
     console.log(e);
     setFilteredRestaurants(filtered);
   };
@@ -159,7 +160,9 @@ export const RestaurantList = () => {
               type="text"
               placeholder="Search a phrase..."
             ></input>
-            <button>NEW BEAST</button>
+            <Link to="/create">
+              <button>NEW BEAST</button>
+            </Link>
           </div>
           <ul className="beast-tiles-list">
             <RenderRestaurantTile />
