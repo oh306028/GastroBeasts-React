@@ -2,11 +2,14 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import foodImg from "../assets/food.png";
 import { getToken, loginUser, registerUser, saveToken } from "./Authentication";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +20,7 @@ export const Login = () => {
 
     const token = await loginUser(loginData);
     saveToken(token);
+    if (getToken() != null) navigate("/beasts");
   };
 
   const handleEmail = (e) => {

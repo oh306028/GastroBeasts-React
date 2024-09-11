@@ -1,6 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const Authentication = () => {};
+export const Authentication = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getToken() == null) {
+      navigate("/login");
+    } else {
+      navigate("/create");
+    }
+  }, [navigate]);
+};
 
 export const registerUser = async (registerData) => {
   const response = await fetch("http://localhost:5194/api/account/register", {
