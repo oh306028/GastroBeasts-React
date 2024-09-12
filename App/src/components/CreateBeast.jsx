@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getToken } from "./Authentication";
 
 export const CreateBeast = () => {
   const [categories, setCategories] = useState([]);
@@ -9,13 +10,49 @@ export const CreateBeast = () => {
   const [restDesc, setRestDesc] = useState("");
   const [restCategories, setRestCategories] = useState([]);
 
-  useEffect(() => {
-    console.log(restDesc);
-  }, [restDesc]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = () => {
-    //generating post endpoints
-    //generating data from inputs
+    const restData = {
+      name: restName, // Ensure restName and restDesc are defined
+      description: restDesc,
+    };
+
+    const CreateRestaurant = async () => {
+      try {
+        const response = await fetch("http://localhost:5194/api/restaurants", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + getToken(),
+          },
+          body: JSON.stringify(restData),
+        });
+
+        console.log(response);
+        return response;
+      } catch (error) {
+        console.error("Error creating restaurant:", error);
+      }
+    };
+
+    try {
+      const response = await CreateRestaurant();
+
+      if (response && response.status === 201) {
+        console.log(response);
+
+        const CreateAddress = (id) => {
+          // Implement logic to create an address using the restaurant's ID
+        };
+
+        CreateAddress(responseData.id);
+      } else {
+        console.error("Failed to create restaurant. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
   };
 
   const GenerateCategoriesCheckbox = () => {
@@ -106,7 +143,7 @@ export const CreateBeast = () => {
             type="text"
             placeholder="Write the restaurant description"
           ></textarea>
-          <button onClick={handleSubmit()} type="submit">
+          <button onClick={handleSubmit} type="submit">
             Create
           </button>
         </form>
