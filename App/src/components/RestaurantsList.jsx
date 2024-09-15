@@ -160,7 +160,7 @@ export const RestaurantList = () => {
               type="text"
               placeholder="Search a phrase..."
             ></input>
-            <Link to="/create">
+            <Link to="/authorize">
               <button>NEW BEAST</button>
             </Link>
           </div>
