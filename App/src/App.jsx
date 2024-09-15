@@ -8,6 +8,8 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { RestaurantList } from "./components/RestaurantsList";
 import { BeastDetails } from "./components/BeastDetails";
+import { Authentication } from "./components/Authentication";
+import { CreateBeast } from "./components/CreateBeast";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register></Register>} />
           <Route path="beasts/:name/details" element={<BeastDetails />} />
+          <Route path="/authorize" element={<Authentication />}></Route>
+          <Route path="/create" element={<CreateBeast />}></Route>
         </Routes>
 
         <Footer />
