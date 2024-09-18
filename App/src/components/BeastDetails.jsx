@@ -5,6 +5,7 @@ import "./BeastDetails.css";
 import navigationImg from "../assets/navigation.png";
 import { RenderAverageStars } from "./RestaurantsList";
 import { ReviewList } from "./ReviewList";
+import { getToken, logout } from "./Authentication";
 
 export const BeastDetails = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ export const BeastDetails = () => {
   console.log(data);
 
   useEffect(() => {
+    console.log(getToken());
     setRestaurant(data);
   }, []);
 
