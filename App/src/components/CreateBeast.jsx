@@ -10,43 +10,62 @@ export const CreateBeast = () => {
   const [restDesc, setRestDesc] = useState("");
   const [restCategories, setRestCategories] = useState([]);
 
+  const restData = {
+    name: restName,
+    description: restDesc,
+  };
+
+  const addressData = {
+    city: restCity,
+    street: restStreet,
+    number: restNumber,
+  };
+
+  const CreateAddress = async (id) => {
+    try {
+      await fetch("http://localhost:5194/api/restaurants/" + id + "/address", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getToken(),
+        },
+        body: JSON.stringify(addressData),
+      });
+    } catch (error) {
+      console.error("Error creating restaurant:", error);
+    }
+  };
+
+  const CreateRestaurant = async () => {
+    try {
+      const response = await fetch("http://localhost:5194/api/restaurants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getToken(),
+        },
+        body: JSON.stringify(restData),
+      });
+
+      return await response;
+    } catch (error) {
+      console.error("Error creating restaurant:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const restData = {
-      name: restName, // Ensure restName and restDesc are defined
-      description: restDesc,
-    };
-
-    const CreateRestaurant = async () => {
-      try {
-        const response = await fetch("http://localhost:5194/api/restaurants", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + getToken(),
-          },
-          body: JSON.stringify(restData),
-        });
-
-        console.log(response);
-        return response;
-      } catch (error) {
-        console.error("Error creating restaurant:", error);
-      }
-    };
 
     try {
       const response = await CreateRestaurant();
 
       if (response && response.status === 201) {
-        console.log(response);
+        const location = response.headers.get("Location");
+        const restaurantId = location.split("/").pop();
 
-        const CreateAddress = (id) => {
-          // Implement logic to create an address using the restaurant's ID
-        };
+        console.log(restaurantId);
 
-        CreateAddress(responseData.id);
+        await CreateAddress(restaurantId);
       } else {
         console.error("Failed to create restaurant. Status:", response.status);
       }
