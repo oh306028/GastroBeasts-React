@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getToken } from "./Authentication";
+import "./CreateBeast.css";
 
 export const CreateBeast = () => {
   const [categories, setCategories] = useState([]);
@@ -121,50 +122,65 @@ export const CreateBeast = () => {
       <h1>dd</h1>
       <div className="form-container">
         <form>
-          <label for="restName">Restaurant name</label>
-          <input
-            onChange={(e) => setRestName(e.target.value.trimStart())}
-            id="restName"
-            placeholder="restaurant name"
-            type="text"
-          ></input>
-          <label>Categories</label>
-          <GenerateCategoriesCheckbox />
+          <div>
+            <div>
+              <label for="restName">Restaurant name</label>
+            </div>
+            <input
+              onChange={(e) => setRestName(e.target.value.trimStart())}
+              id="restName"
+              placeholder="restaurant name"
+              type="text"
+            ></input>
+          </div>
+          <div>
+            <label>Categories</label>
+            <GenerateCategoriesCheckbox />
+          </div>
+          <div>
+            <div>
+              <label for="City">City</label>
+            </div>
+            <input
+              onChange={(e) => setRestCity(e.target.value.trim())}
+              type="text"
+              id="City"
+              placeholder="City"
+            ></input>
+            <div>
+              <label for="Street">Street</label>
+            </div>
+            <input
+              onChange={(e) => setRestStreet(e.target.value.trim())}
+              type="text"
+              id="Street"
+              placeholder="Street"
+            ></input>
+            <div>
+              <label for="Number">Number</label>
+            </div>
+            <input
+              onChange={(e) => setRestNumber(e.target.value.trim())}
+              type="text"
+              id="Number"
+              placeholder="Number"
+            ></input>
+          </div>
 
-          <label for="City">City</label>
-          <input
-            onChange={(e) => setRestCity(e.target.value.trim())}
-            type="text"
-            id="City"
-            placeholder="City"
-          ></input>
-
-          <label for="Street">City</label>
-          <input
-            onChange={(e) => setRestStreet(e.target.value.trim())}
-            type="text"
-            id="Street"
-            placeholder="Street"
-          ></input>
-
-          <label for="Number">City</label>
-          <input
-            onChange={(e) => setRestNumber(e.target.value.trim())}
-            type="text"
-            id="Number"
-            placeholder="Number"
-          ></input>
-
-          <label for="descr">Description</label>
+          <div>
+            <label for="descr">Description</label>
+          </div>
           <textarea
             onChange={(e) => setRestDesc(e.target.value.trimStart())}
             id="descr"
             type="text"
             placeholder="Write the restaurant description"
           ></textarea>
-          <button onClick={handleSubmit} type="submit">
-            Create
-          </button>
+          <div>
+            <button onClick={handleSubmit} type="submit">
+              Create
+            </button>
+          </div>
         </form>
       </div>
     </>
