@@ -40,8 +40,8 @@
 .beast-list-container ul {
   list-style: none;
   display: flex;
-  flex: wrap;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .beast-page-container {
@@ -50,12 +50,17 @@
 }
 
 .beast-tiles-list > li {
-  width: 25%;
-  gap: 10px;
+  width: calc(25% - 15px); /* Make sure 4 items fit per row */
   margin-right: 15px;
   background-color: rgb(245, 235, 235);
   border: 1px solid black;
   border-radius: 10px;
+  margin-bottom: 15px;
+  height: 275px;
+}
+
+.beast-tiles-list > li:nth-child(4n) {
+  margin-right: 0;
 }
 
 .categories-list-menu {
