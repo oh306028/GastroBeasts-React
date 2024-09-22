@@ -75,44 +75,45 @@ export const CreateBeast = () => {
     }
   };
 
-  const GenerateCategoriesCheckbox = () => {
-    useEffect(() => {
-      const fetchCategories = async () => {
-        const response = await fetch(
-          "http://localhost:5194/api/restaurants/categories"
-        );
-        const result = await response.json();
-        setCategories(result);
-      };
-      fetchCategories();
-    }, []);
-
-    const handleCheckbox = (e) => {
-      const categoryId = e.target.id;
-
-      setRestCategories((prevCategories) => {
-        if (prevCategories.includes(categoryId)) {
-          return prevCategories.filter((category) => category !== categoryId);
-        } else {
-          return [...prevCategories, categoryId];
-        }
-      });
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch(
+        "http://localhost:5194/api/restaurants/categories"
+      );
+      const result = await response.json();
+      setCategories(result);
     };
+    fetchCategories();
+  }, []);
 
+  const handleCheckbox = (e) => {
+    const categoryId = e.target.id;
+
+    setRestCategories((prevCategories) => {
+      if (prevCategories.includes(categoryId)) {
+        return prevCategories.filter((category) => category !== categoryId);
+      } else {
+        return [...prevCategories, categoryId];
+      }
+    });
+  };
+
+  const GenerateCategoriesCheckbox = () => {
     return (
       <>
-        {categories.map((c) => (
-          <ul>
-            <li key={c.id}>
+        <ul>
+          {categories.map((c) => (
+            <li key={c.name}>
               <input
-                onClick={handleCheckbox}
+                onChange={handleCheckbox}
                 id={c.name}
                 type="checkbox"
+                checked={restCategories.includes(c.name)}
               ></input>
               <label for={c.name}>{c.name}</label>
             </li>
-          </ul>
-        ))}
+          ))}
+        </ul>
       </>
     );
   };
@@ -137,34 +138,38 @@ export const CreateBeast = () => {
             <label>Categories</label>
             <GenerateCategoriesCheckbox />
           </div>
-          <div>
+
+          <div className="address-container">
             <div>
               <label for="City">City</label>
+
+              <input
+                onChange={(e) => setRestCity(e.target.value.trim())}
+                type="text"
+                id="City"
+                placeholder="City"
+              ></input>
             </div>
-            <input
-              onChange={(e) => setRestCity(e.target.value.trim())}
-              type="text"
-              id="City"
-              placeholder="City"
-            ></input>
             <div>
               <label for="Street">Street</label>
+
+              <input
+                onChange={(e) => setRestStreet(e.target.value.trim())}
+                type="text"
+                id="Street"
+                placeholder="Street"
+              ></input>
             </div>
-            <input
-              onChange={(e) => setRestStreet(e.target.value.trim())}
-              type="text"
-              id="Street"
-              placeholder="Street"
-            ></input>
             <div>
               <label for="Number">Number</label>
+
+              <input
+                onChange={(e) => setRestNumber(e.target.value.trim())}
+                type="text"
+                id="Number"
+                placeholder="Number"
+              ></input>
             </div>
-            <input
-              onChange={(e) => setRestNumber(e.target.value.trim())}
-              type="text"
-              id="Number"
-              placeholder="Number"
-            ></input>
           </div>
 
           <div>
