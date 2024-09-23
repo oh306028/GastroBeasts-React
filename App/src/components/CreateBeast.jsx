@@ -10,6 +10,7 @@ export const CreateBeast = () => {
   const [restNumber, setRestNumber] = useState("");
   const [restDesc, setRestDesc] = useState("");
   const [restCategories, setRestCategories] = useState([]);
+  const [isValid, SetIsValid] = useState(true);
 
   const restData = {
     name: restName,
@@ -20,6 +21,18 @@ export const CreateBeast = () => {
     city: restCity,
     street: restStreet,
     number: restNumber,
+  };
+
+  const ValidateData = () => {
+    if (restName > 30 || restName.length == 0) SetIsValid(false);
+
+    if (restDesc > 200) SetIsValid(false);
+
+    if (addressData.city.length > 20) SetIsValid(false);
+
+    if (addressData.street.length > 25) SetIsValid(false);
+
+    if (addressData.number.length > 10) SetIsValid(false);
   };
 
   const CreateAddress = async (id) => {
@@ -57,21 +70,30 @@ export const CreateBeast = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await CreateRestaurant();
+    ValidateData();
 
-      if (response && response.status === 201) {
-        const location = response.headers.get("Location");
-        const restaurantId = location.split("/").pop();
+    if (!isValid) {
+      alert("Wrong data!");
+    } else {
+      try {
+        const response = await CreateRestaurant();
 
-        console.log(restaurantId);
+        if (response && response.status === 201) {
+          const location = response.headers.get("Location");
+          const restaurantId = location.split("/").pop();
 
-        await CreateAddress(restaurantId);
-      } else {
-        console.error("Failed to create restaurant. Status:", response.status);
+          console.log(restaurantId);
+
+          await CreateAddress(restaurantId);
+        } else {
+          console.error(
+            "Failed to create restaurant. Status:",
+            response.status
+          );
+        }
+      } catch (error) {
+        console.error("Error in handleSubmit:", error);
       }
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
     }
   };
 
@@ -123,7 +145,7 @@ export const CreateBeast = () => {
       <h1>dd</h1>
       <div className="form-container">
         <form>
-          <div>
+          <div className="restname-container">
             <div>
               <label for="restName">Restaurant name</label>
             </div>
@@ -182,7 +204,11 @@ export const CreateBeast = () => {
             placeholder="Write the restaurant description"
           ></textarea>
           <div>
-            <button onClick={handleSubmit} type="submit">
+            <button
+              className="addRestButton"
+              onClick={handleSubmit}
+              type="submit"
+            >
               Create
             </button>
           </div>
