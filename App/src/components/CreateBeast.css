@@ -59,7 +59,7 @@
   margin-bottom: 15px;
 }
 
-button {
+.addRestButton {
   width: 100%;
   margin-top: 8px;
   font-size: 25px;
@@ -71,8 +71,14 @@ button {
   border-radius: 8px;
 }
 
-button:hover {
+.addRestButton:hover {
   background-color: hsl(271, 91%, 63%);
   transition: ease 0.25s;
   cursor: pointer;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+  font-weight: 100;
 }
