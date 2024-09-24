@@ -18,9 +18,16 @@ export const Login = () => {
       password: password,
     };
 
+    const refreshPage = () => {
+      window.location.reload();
+    };
+
     const token = await loginUser(loginData);
     saveToken(token);
-    if (getToken() != null) navigate("/beasts");
+    if (getToken() != null) {
+      navigate("/beasts");
+      refreshPage();
+    }
   };
 
   const handleEmail = (e) => {
