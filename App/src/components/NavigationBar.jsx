@@ -1,7 +1,22 @@
 import "./NavigationBar.css";
 import { Link } from "react-router-dom";
+import { getToken, logout } from "./Authentication";
+import { useEffect, useState } from "react";
 
 export const NavigationBar = () => {
+  const [token, SetToken] = useState();
+
+  useEffect(() => {
+    let currentToken = getToken();
+    console.log(currentToken);
+    SetToken(currentToken);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    SetToken(null);
+  };
+
   return (
     <div className="nav-bar">
       <Link to="gastroInfo">
@@ -19,9 +34,15 @@ export const NavigationBar = () => {
           <p>CONTACT</p>
         </Link>
       </div>
-      <Link to="/login">
-        <p>SIGN IN</p>
-      </Link>
+      {token === null ? (
+        <Link to="/login">
+          <p>SIGN IN</p>
+        </Link>
+      ) : (
+        <Link to="/">
+          <p onClick={handleLogout}>LOGOUT</p>
+        </Link>
+      )}
     </div>
   );
 };
