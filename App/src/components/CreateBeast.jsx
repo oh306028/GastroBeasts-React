@@ -10,7 +10,14 @@ export const CreateBeast = () => {
   const [restNumber, setRestNumber] = useState("");
   const [restDesc, setRestDesc] = useState("");
   const [restCategories, setRestCategories] = useState([]);
-  const [isValid, SetIsValid] = useState(true);
+  const [error, SetError] = useState({
+    name: "",
+    descr: "",
+    city: "",
+    street: "",
+    number: "",
+    categories: "",
+  });
 
   const restData = {
     name: restName,
@@ -24,15 +31,66 @@ export const CreateBeast = () => {
   };
 
   const ValidateData = () => {
-    if (restName > 30 || restName.length == 0) SetIsValid(false);
+    let isValidData = true;
+    const newError = {
+      name: "",
+      descr: "",
+      city: "",
+      street: "",
+      number: "",
+      categories: "",
+    };
 
-    if (restDesc > 200) SetIsValid(false);
+    if (restName.length > 30) {
+      isValidData = false;
+      newError.name = "Name cannot be more than 30 characters long!";
+    }
+    if (restName.length === 0) {
+      isValidData = false;
+      newError.name = "Name cannot be empty!";
+    }
 
-    if (addressData.city.length > 20) SetIsValid(false);
+    if (restDesc.length > 200) {
+      isValidData = false;
+      newError.descr = "Description cannot be more than 200 characters long!";
+    }
+    if (restDesc.length === 0) {
+      isValidData = false;
+      newError.descr = "Description cannot be empty!";
+    }
 
-    if (addressData.street.length > 25) SetIsValid(false);
+    if (addressData.city.length > 20) {
+      isValidData = false;
+      newError.city = "City cannot be more than 20 characters!";
+    }
 
-    if (addressData.number.length > 10) SetIsValid(false);
+    if (addressData.city.length === 0) {
+      isValidData = false;
+      newError.city = "City cannot be empty!";
+    }
+
+    if (addressData.street.length > 25) {
+      isValidData = false;
+      newError.street = "Street cannot be more than 20 characters!";
+    }
+
+    if (addressData.street.length === 0) {
+      isValidData = false;
+      newError.street = "Street cannot be empty!";
+    }
+
+    if (addressData.number.length > 10) {
+      isValidData = false;
+      newError.number = "Number cannot be more than 20 characters!";
+    }
+
+    if (addressData.number.length === 0) {
+      isValidData = false;
+      newError.number = "Number cannot be empty!";
+    }
+
+    SetError(newError);
+    return isValidData;
   };
 
   const CreateAddress = async (id) => {
@@ -70,10 +128,10 @@ export const CreateBeast = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    ValidateData();
+    const isValid = ValidateData();
 
     if (!isValid) {
-      alert("Wrong data!");
+      return;
     } else {
       try {
         const response = await CreateRestaurant();
@@ -155,6 +213,7 @@ export const CreateBeast = () => {
               placeholder="restaurant name"
               type="text"
             ></input>
+            {error.name && <span className="error">{error.name}</span>}
           </div>
           <div>
             <label>Categories</label>
@@ -171,6 +230,7 @@ export const CreateBeast = () => {
                 id="City"
                 placeholder="City"
               ></input>
+              {error.city && <span className="error">{error.city}</span>}
             </div>
             <div>
               <label for="Street">Street</label>
@@ -181,6 +241,7 @@ export const CreateBeast = () => {
                 id="Street"
                 placeholder="Street"
               ></input>
+              {error.street && <span className="error">{error.street}</span>}
             </div>
             <div>
               <label for="Number">Number</label>
@@ -191,6 +252,7 @@ export const CreateBeast = () => {
                 id="Number"
                 placeholder="Number"
               ></input>
+              {error.number && <span className="error">{error.number}</span>}
             </div>
           </div>
 
@@ -203,6 +265,7 @@ export const CreateBeast = () => {
             type="text"
             placeholder="Write the restaurant description"
           ></textarea>
+          {error.descr && <span className="error">{error.descr}</span>}
           <div>
             <button
               className="addRestButton"
