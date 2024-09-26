@@ -8,6 +8,9 @@ export const RestaurantTile = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:5194/api/restaurants/all");
