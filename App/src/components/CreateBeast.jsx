@@ -93,6 +93,26 @@ export const CreateBeast = () => {
     return isValidData;
   };
 
+  const JoinCategoriesForRestaurant = async (id) => {
+    try {
+      await Promise.all(
+        restCategories.map((category) =>
+          fetch("http://localhost:5194/api/restaurants/" + id + "/categories", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getToken(),
+            },
+            body: JSON.stringify({ name: category }),
+          })
+        )
+      );
+      console.log("Categories joined successfully");
+    } catch (error) {
+      console.error("Error joining categories:", error);
+    }
+  };
+
   const CreateAddress = async (id) => {
     try {
       await fetch("http://localhost:5194/api/restaurants/" + id + "/address", {
@@ -143,6 +163,7 @@ export const CreateBeast = () => {
           console.log(restaurantId);
 
           await CreateAddress(restaurantId);
+          await JoinCategoriesForRestaurant(restaurantId);
         } else {
           console.error(
             "Failed to create restaurant. Status:",
