@@ -6,6 +6,7 @@ import navigationImg from "../assets/navigation.png";
 import { RenderAverageStars } from "./RestaurantsList";
 import { ReviewList } from "./ReviewList";
 import { getToken, logout } from "./Authentication";
+import { CreateReview } from "./CreateReview";
 
 export const BeastDetails = () => {
   const location = useLocation();
@@ -62,6 +63,7 @@ export const BeastDetails = () => {
           <ReviewList reviews={restaurant.reviews} />
         </div>
       </div>
+      <CreateReview></CreateReview>
     </>
   );
 };
