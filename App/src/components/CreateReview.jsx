@@ -10,17 +10,21 @@ export const CreateReview = () => {
   const ReviewForm = () => {
     return (
       <>
+        <h4>user</h4>
+        <textarea placeholder="Enter your opinion..."></textarea>
+        <p>Select stars:</p>
         <form>
-          <h4>User name</h4>
-          <input type="text" placeholder="Enter the review"></input>
+          <input id="1" type="radio" name="stars"></input>
+          <label for="1">1</label>
+          <input id="2" type="radio" name="stars"></input>
+          <label for="2">2</label>
+          <input id="3" type="radio" name="stars"></input>
+          <label for="3">3</label>
+          <input id="4" type="radio" name="stars"></input>
+          <label for="4">4</label>
+          <input id="5" type="radio" name="stars"></input>
+          <label for="5">5</label>
         </form>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-        </ul>
       </>
     );
   };
