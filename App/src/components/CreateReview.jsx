@@ -3,9 +3,15 @@ import { useState } from "react";
 export const CreateReview = () => {
   const [toggleReviewAdd, setToggleReviewAdd] = useState(false);
 
+  const [comment, setComment] = useState();
+
   const handleToggleReview = () => {
     setToggleReviewAdd(!toggleReviewAdd);
   };
+
+  const handleCommentChange = () => {
+    
+  }
 
   const ReviewForm = () => {
     return (
