@@ -1,29 +1,93 @@
 import { useState } from "react";
 import { getToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
+
+// Move ReviewForm outside of CreateReview component
+const ReviewForm = ({
+  comment,
+  handleCommentChange,
+  star,
+  handleStarChange,
+  handleSubmitReview,
+}) => {
+  return (
+    <>
+      <h4>user</h4>
+      <textarea
+        value={comment}
+        onChange={handleCommentChange}
+        placeholder="Enter your opinion..."
+      ></textarea>
+      <p>Select stars:</p>
+      <form onSubmit={handleSubmitReview}>
+        <input
+          onChange={handleStarChange}
+          id="1"
+          checked={star == 1}
+          type="radio"
+          name="stars"
+        />
+        <label htmlFor="1">1</label>
+        <input
+          checked={star == 2}
+          onChange={handleStarChange}
+          id="2"
+          type="radio"
+          name="stars"
+        />
+        <label htmlFor="2">2</label>
+        <input
+          checked={star == 3}
+          onChange={handleStarChange}
+          id="3"
+          type="radio"
+          name="stars"
+        />
+        <label htmlFor="3">3</label>
+        <input
+          onChange={handleStarChange}
+          checked={star == 4}
+          id="4"
+          type="radio"
+          name="stars"
+        />
+        <label htmlFor="4">4</label>
+        <input
+          onChange={handleStarChange}
+          id="5"
+          checked={star == 5}
+          type="radio"
+          name="stars"
+        />
+        <label htmlFor="5">5</label>
+        <button type="submit">Send</button>
+      </form>
+    </>
+  );
+};
 
 export const CreateReview = (props) => {
   const [toggleReviewAdd, setToggleReviewAdd] = useState(false);
-
-  const [comment, setComment] = useState();
+  const navigate = useNavigate();
+  const [comment, setComment] = useState(""); // Initialize with an empty string
   const [star, setStar] = useState(1);
 
   const handleToggleReview = () => {
     setToggleReviewAdd(!toggleReviewAdd);
   };
 
-  const handleCommentChange = () => {
-    (e) => setComment(e.target.value.trimStart());
+  const handleCommentChange = (e) => {
+    setComment(e.target.value.trimStart()); // Update state when text changes
   };
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
-
     await postReview();
-    setToggleReviewAdd(false);
+    window.location.reload();
   };
 
   const handleStarChange = (e) => {
-    setStar(e.target.id);
+    setStar(Number(e.target.id));
   };
 
   const postReview = async () => {
@@ -49,67 +113,19 @@ export const CreateReview = (props) => {
     }
   };
 
-  const ReviewForm = () => {
-    return (
-      <>
-        <h4>user</h4>
-        <textarea
-          onChange={handleCommentChange}
-          placeholder="Enter your opinion..."
-        ></textarea>
-        <p>Select stars:</p>
-        <form>
-          <input
-            onChange={handleStarChange}
-            id="1"
-            checked={star == 1}
-            type="radio"
-            name="stars"
-          ></input>
-          <label for="1">1</label>
-          <input
-            checked={star == 2}
-            onChange={handleStarChange}
-            id="2"
-            type="radio"
-            name="stars"
-          ></input>
-          <label for="2">2</label>
-          <input
-            checked={star == 3}
-            onChange={handleStarChange}
-            id="3"
-            type="radio"
-            name="stars"
-          ></input>
-          <label for="3">3</label>
-          <input
-            onChange={handleStarChange}
-            checked={star == 4}
-            id="4"
-            type="radio"
-            name="stars"
-          ></input>
-          <label for="4">4</label>
-          <input
-            onChange={handleStarChange}
-            id="5"
-            checked={star == 5}
-            type="radio"
-            name="stars"
-          ></input>
-          <label for="5">5</label>
-        </form>
-        <button onClick={handleSubmitReview}>Send</button>
-      </>
-    );
-  };
-
   return (
     <>
       <div className="reviewAdd-container">
         <button onClick={handleToggleReview}>Add review</button>
-        {toggleReviewAdd && <ReviewForm />}
+        {toggleReviewAdd && (
+          <ReviewForm
+            comment={comment}
+            handleCommentChange={handleCommentChange}
+            star={star}
+            handleStarChange={handleStarChange}
+            handleSubmitReview={handleSubmitReview}
+          />
+        )}
       </div>
     </>
   );
