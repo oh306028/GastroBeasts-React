@@ -4,33 +4,80 @@ export const CreateReview = () => {
   const [toggleReviewAdd, setToggleReviewAdd] = useState(false);
 
   const [comment, setComment] = useState();
+  const [star, setStar] = useState(1);
 
   const handleToggleReview = () => {
     setToggleReviewAdd(!toggleReviewAdd);
   };
 
-  const handleCommentChange = () => {
-    
-  }
+  const handleCommentChange = (e) => {
+    setComment(e.target.value.trimStart());
+  };
+
+  const handleSubmitReview = (e) => {
+    e.preventDefault();
+
+    //sending http request
+
+    setToggleReviewAdd(false);
+  };
+
+  const handleStarChange = (e) => {
+    setStar(e.target.id);
+  };
 
   const ReviewForm = () => {
     return (
       <>
         <h4>user</h4>
-        <textarea placeholder="Enter your opinion..."></textarea>
+        <textarea
+          onChange={(e) => handleCommentChange}
+          placeholder="Enter your opinion..."
+        ></textarea>
         <p>Select stars:</p>
         <form>
-          <input id="1" type="radio" name="stars"></input>
+          <input
+            onChange={handleStarChange}
+            id="1"
+            checked={star == 1}
+            type="radio"
+            name="stars"
+          ></input>
           <label for="1">1</label>
-          <input id="2" type="radio" name="stars"></input>
+          <input
+            checked={star == 2}
+            onChange={handleStarChange}
+            id="2"
+            type="radio"
+            name="stars"
+          ></input>
           <label for="2">2</label>
-          <input id="3" type="radio" name="stars"></input>
+          <input
+            checked={star == 3}
+            onChange={handleStarChange}
+            id="3"
+            type="radio"
+            name="stars"
+          ></input>
           <label for="3">3</label>
-          <input id="4" type="radio" name="stars"></input>
+          <input
+            onChange={handleStarChange}
+            checked={star == 4}
+            id="4"
+            type="radio"
+            name="stars"
+          ></input>
           <label for="4">4</label>
-          <input id="5" type="radio" name="stars"></input>
+          <input
+            onChange={handleStarChange}
+            id="5"
+            checked={star == 5}
+            type="radio"
+            name="stars"
+          ></input>
           <label for="5">5</label>
         </form>
+        <button onClick={handleSubmitReview}>Send</button>
       </>
     );
   };
