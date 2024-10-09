@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { getToken } from "./Authentication";
 
-export const CreateReview = () => {
+export const CreateReview = (props) => {
   const [toggleReviewAdd, setToggleReviewAdd] = useState(false);
 
   const [comment, setComment] = useState();
@@ -10,15 +11,14 @@ export const CreateReview = () => {
     setToggleReviewAdd(!toggleReviewAdd);
   };
 
-  const handleCommentChange = (e) => {
-    setComment(e.target.value.trimStart());
+  const handleCommentChange = () => {
+    (e) => setComment(e.target.value.trimStart());
   };
 
-  const handleSubmitReview = (e) => {
+  const handleSubmitReview = async (e) => {
     e.preventDefault();
 
-    //sending http request
-
+    await postReview();
     setToggleReviewAdd(false);
   };
 
@@ -26,12 +26,35 @@ export const CreateReview = () => {
     setStar(e.target.id);
   };
 
+  const postReview = async () => {
+    const reviewData = {
+      comment: comment,
+      stars: star,
+    };
+
+    try {
+      await fetch(
+        `http://localhost:5194/api/restaurants/${props.restaurantId}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + getToken(),
+          },
+          body: JSON.stringify(reviewData),
+        }
+      );
+    } catch (error) {
+      console.error("Error creating restaurant:", error);
+    }
+  };
+
   const ReviewForm = () => {
     return (
       <>
         <h4>user</h4>
         <textarea
-          onChange={(e) => handleCommentChange}
+          onChange={handleCommentChange}
           placeholder="Enter your opinion..."
         ></textarea>
         <p>Select stars:</p>
