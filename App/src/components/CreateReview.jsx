@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { getToken } from "./Authentication";
 import { useNavigate } from "react-router-dom";
+import "./CreateReview.css";
 
-// Move ReviewForm outside of CreateReview component
 const ReviewForm = ({
   comment,
   handleCommentChange,
@@ -12,56 +12,60 @@ const ReviewForm = ({
 }) => {
   return (
     <>
-      <h4>user</h4>
-      <textarea
-        value={comment}
-        onChange={handleCommentChange}
-        placeholder="Enter your opinion..."
-      ></textarea>
-      <p>Select stars:</p>
-      <form onSubmit={handleSubmitReview}>
-        <input
-          onChange={handleStarChange}
-          id="1"
-          checked={star == 1}
-          type="radio"
-          name="stars"
-        />
-        <label htmlFor="1">1</label>
-        <input
-          checked={star == 2}
-          onChange={handleStarChange}
-          id="2"
-          type="radio"
-          name="stars"
-        />
-        <label htmlFor="2">2</label>
-        <input
-          checked={star == 3}
-          onChange={handleStarChange}
-          id="3"
-          type="radio"
-          name="stars"
-        />
-        <label htmlFor="3">3</label>
-        <input
-          onChange={handleStarChange}
-          checked={star == 4}
-          id="4"
-          type="radio"
-          name="stars"
-        />
-        <label htmlFor="4">4</label>
-        <input
-          onChange={handleStarChange}
-          id="5"
-          checked={star == 5}
-          type="radio"
-          name="stars"
-        />
-        <label htmlFor="5">5</label>
-        <button type="submit">Send</button>
-      </form>
+      <div className="review-form-container">
+        <h4>user</h4>
+        <textarea
+          value={comment}
+          onChange={handleCommentChange}
+          placeholder="Enter your opinion..."
+        ></textarea>
+        <p>Select stars:</p>
+        <form className="stars-container" onSubmit={handleSubmitReview}>
+          <input
+            onChange={handleStarChange}
+            id="1"
+            checked={star == 1}
+            type="radio"
+            name="stars"
+          />
+          <label htmlFor="1">1</label>
+          <input
+            checked={star == 2}
+            onChange={handleStarChange}
+            id="2"
+            type="radio"
+            name="stars"
+          />
+          <label htmlFor="2">2</label>
+          <input
+            checked={star == 3}
+            onChange={handleStarChange}
+            id="3"
+            type="radio"
+            name="stars"
+          />
+          <label htmlFor="3">3</label>
+          <input
+            onChange={handleStarChange}
+            checked={star == 4}
+            id="4"
+            type="radio"
+            name="stars"
+          />
+          <label htmlFor="4">4</label>
+          <input
+            onChange={handleStarChange}
+            id="5"
+            checked={star == 5}
+            type="radio"
+            name="stars"
+          />
+          <label htmlFor="5">5</label>
+          <div className="submit-button-revAdd">
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
@@ -69,15 +73,22 @@ const ReviewForm = ({
 export const CreateReview = (props) => {
   const [toggleReviewAdd, setToggleReviewAdd] = useState(false);
   const navigate = useNavigate();
-  const [comment, setComment] = useState(""); // Initialize with an empty string
+  const [comment, setComment] = useState("");
   const [star, setStar] = useState(1);
+  const [buttonText, setButtonText] = useState("Add review");
 
   const handleToggleReview = () => {
     setToggleReviewAdd(!toggleReviewAdd);
+
+    if (!toggleReviewAdd) {
+      setButtonText("Hide review");
+    } else {
+      setButtonText("Add review");
+    }
   };
 
   const handleCommentChange = (e) => {
-    setComment(e.target.value.trimStart()); // Update state when text changes
+    setComment(e.target.value.trimStart());
   };
 
   const handleSubmitReview = async (e) => {
@@ -116,7 +127,9 @@ export const CreateReview = (props) => {
   return (
     <>
       <div className="reviewAdd-container">
-        <button onClick={handleToggleReview}>Add review</button>
+        <button className="hideReview" onClick={handleToggleReview}>
+          {buttonText}
+        </button>
         {toggleReviewAdd && (
           <ReviewForm
             comment={comment}
