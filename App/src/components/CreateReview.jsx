@@ -13,7 +13,6 @@ const ReviewForm = ({
   return (
     <>
       <div className="review-form-container">
-        <h4>user</h4>
         <textarea
           value={comment}
           onChange={handleCommentChange}
