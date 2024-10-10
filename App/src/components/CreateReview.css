@@ -13,11 +13,30 @@
   justify-content: center;
 }
 
+.review-form-container textarea {
+  max-height: 75px;
+  height: 75px;
+  min-height: 75px;
+  max-width: 600px;
+  min-width: 600px;
+}
+
 .hideReview {
-  border: none;
-  font-size: 20px;
   margin-top: 35px;
   margin-left: 46.5%;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+  border: 1px solid black;
+  color: white;
+  background-color: hsl(263, 28%, 24%);
+}
+
+.hideReview:hover {
+  background-color: hsl(263, 30%, 39%);
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .submit-button-revAdd {
@@ -32,4 +51,16 @@
 
 .submit-button-revAdd button {
   width: 75%;
+  padding: 3px;
+  font-size: 16px;
+  color: white;
+  background-color: blueviolet;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.submit-button-revAdd button:hover {
+  background-color: hsl(271, 91%, 63%);
+  transition: ease 0.25s;
+  cursor: pointer;
 }
