@@ -32,7 +32,7 @@
   padding: 5px;
   width: 100%;
   margin-bottom: 9px;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 .register-form .password {
@@ -58,4 +58,23 @@
 
 .register-page-container img {
   margin-left: 0px;
+}
+
+.register-container span {
+  color: red;
+}
+
+.password-container {
+  display: flex;
+  gap: 5px;
+}
+
+.password-container div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.password-container input {
+  width: 100%;
 }
