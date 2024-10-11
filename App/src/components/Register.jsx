@@ -9,13 +9,6 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
-  const [userRegisterData, setUserRegisterData] = useState({
-    nickName: nickName,
-    email: email,
-    password: password,
-    confirmPassword: confPassword,
-  });
-
   const [error, setError] = useState({
     nickName: "",
     email: "",
@@ -23,7 +16,14 @@ export const Register = () => {
     confirmPassword: "",
   });
 
-  const validateData = (data) => {
+  const validateData = () => {
+    const data = {
+      nickName: nickName,
+      email: email,
+      password: password,
+      confirmPassword: confPassword,
+    };
+
     let isValid = true;
     const newError = {
       nickName: "",
@@ -64,13 +64,29 @@ export const Register = () => {
   const handleRegistration = (e) => {
     e.preventDefault();
 
-    const isValid = validateData(userRegisterData);
+    const isValid = validateData();
 
     if (!isValid) {
       return;
     } else {
       //send post request to register user
     }
+  };
+
+  const handleNickNameChange = (e) => {
+    setNickName(e.target.value.trimStart());
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value.trimStart());
+  };
+
+  const passwordChangeHandle = (e) => {
+    setPassword(e.target.value.trimStart());
+  };
+
+  const confirmPasswordChangeHandle = (e) => {
+    setConfPassword(e.target.value.trimStart());
   };
 
   return (
@@ -81,14 +97,14 @@ export const Register = () => {
           <form className="register-form">
             <div>
               <input
-                onChange={(e) => setNickName(e.target.value.trimStart())}
+                onChange={handleNickNameChange}
                 type="text"
                 placeholder="Nick name"
               ></input>
               {error.nickName && <span>{error.nickName}</span>}
 
               <input
-                onChange={(e) => setEmail(e.target.value.trimStart())}
+                onChange={handleEmailChange}
                 type="text"
                 placeholder="Email"
               ></input>
@@ -98,7 +114,7 @@ export const Register = () => {
             <div className="password-container">
               <div>
                 <input
-                  onChange={(e) => setPassword(e.target.value.trimStart())}
+                  onChange={passwordChangeHandle}
                   className="password"
                   type="password"
                   placeholder="Password"
@@ -110,7 +126,7 @@ export const Register = () => {
 
               <div>
                 <input
-                  onChange={(e) => setConfPassword(e.target.value.trimStart())}
+                  onChange={confirmPasswordChangeHandle}
                   className="rightPassword"
                   type="password"
                   placeholder="Confirm password"
