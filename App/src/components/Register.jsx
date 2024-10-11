@@ -48,12 +48,12 @@ export const Register = () => {
     }
 
     if (data.password.length === 0) {
-      newError.password = "Password cannot be empty";
+      newError.password = "Cannot be empty";
       isValid = false;
     }
 
     if (data.confirmPassword.length === 0) {
-      newError.confPassword = "Confirm password cannot be empty";
+      newError.confPassword = "Cannot be empty";
       isValid = false;
     }
 
@@ -95,21 +95,31 @@ export const Register = () => {
               {error.email && <span>{error.email}</span>}
             </div>
 
-            <input
-              onChange={(e) => setPassword(e.target.value.trimStart())}
-              className="password"
-              type="password"
-              placeholder="Password"
-            ></input>
-            {error.password && <span>{error.password}</span>}
+            <div className="password-container">
+              <div>
+                <input
+                  onChange={(e) => setPassword(e.target.value.trimStart())}
+                  className="password"
+                  type="password"
+                  placeholder="Password"
+                />
+                {error.password && (
+                  <span className="error">{error.password}</span>
+                )}
+              </div>
 
-            <input
-              onChange={(e) => setConfPassword(e.target.value.trimStart())}
-              className="rightPassword"
-              type="password"
-              placeholder="Confirm password"
-            ></input>
-            {error.confPassword && <span>{error.confPassword}</span>}
+              <div>
+                <input
+                  onChange={(e) => setConfPassword(e.target.value.trimStart())}
+                  className="rightPassword"
+                  type="password"
+                  placeholder="Confirm password"
+                />
+                {error.confPassword && (
+                  <span className="error">{error.confPassword}</span>
+                )}
+              </div>
+            </div>
 
             <button
               onClick={handleRegistration}
