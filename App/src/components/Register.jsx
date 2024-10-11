@@ -2,6 +2,7 @@ import "./Register.css";
 import food from "../assets/register-food.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [nickName, setNickName] = useState("");
@@ -16,14 +17,7 @@ export const Register = () => {
     confirmPassword: "",
   });
 
-  const validateData = () => {
-    const data = {
-      nickName: nickName,
-      email: email,
-      password: password,
-      confirmPassword: confPassword,
-    };
-
+  const validateData = (data) => {
     let isValid = true;
     const newError = {
       nickName: "",
@@ -61,15 +55,37 @@ export const Register = () => {
     return isValid;
   };
 
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
 
-    const isValid = validateData();
+    const navigate = useNavigate();
+
+    const data = {
+      nickName: nickName,
+      email: email,
+      password: password,
+      confirmPassword: confPassword,
+    };
+
+    const isValid = validateData(data);
 
     if (!isValid) {
       return;
     } else {
-      //send post request to register user
+      try {
+        await fetch("http://localhost:5194/api/account/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
+      navigate("/beasts");
+      refreshPage();
     }
   };
 
