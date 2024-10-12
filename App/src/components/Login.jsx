@@ -54,8 +54,10 @@ export const Login = () => {
       };
 
       const token = await loginUser(loginData);
+      console.log(token);
+
       saveToken(token);
-      if (getToken() != null) {
+      if (getToken() != "Invalid Email or password") {
         navigate("/beasts");
         refreshPage();
       }
