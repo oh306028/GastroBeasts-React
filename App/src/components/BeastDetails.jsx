@@ -63,7 +63,7 @@ export const BeastDetails = () => {
           <ReviewList reviews={restaurant.reviews} />
         </div>
       </div>
-      <CreateReview></CreateReview>
+      <CreateReview restaurantId={restaurant.id}></CreateReview>
     </>
   );
 };
