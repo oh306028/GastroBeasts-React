@@ -53,3 +53,8 @@
 .login-form span {
   color: red;
 }
+
+.not-found-span {
+  display: flex;
+  justify-content: center;
+}
