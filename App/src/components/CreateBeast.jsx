@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getToken } from "./Authentication";
 import "./CreateBeast.css";
+import { Navigate } from "react-router-dom";
 
 export const CreateBeast = () => {
   const [categories, setCategories] = useState([]);
@@ -164,6 +165,8 @@ export const CreateBeast = () => {
 
           await CreateAddress(restaurantId);
           await JoinCategoriesForRestaurant(restaurantId);
+
+          alert("Restaurant created successfully!");
         } else {
           console.error(
             "Failed to create restaurant. Status:",
