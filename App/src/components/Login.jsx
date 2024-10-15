@@ -13,7 +13,10 @@ export const Login = () => {
     password: "",
   });
 
+  const [isAccFound, setIsAccFound] = useState(true);
+
   const validateForm = (data) => {
+    setIsAccFound(true);
     const newError = {
       email: "",
       password: "",
@@ -54,10 +57,14 @@ export const Login = () => {
       };
 
       const token = await loginUser(loginData);
+      console.log(token);
+
       saveToken(token);
-      if (getToken() != null) {
+      if (getToken() != "Invalid Email or password") {
         navigate("/beasts");
         refreshPage();
+      } else {
+        setIsAccFound(false);
       }
     }
   };
@@ -89,6 +96,9 @@ export const Login = () => {
               placeholder="Password"
             ></input>
             {error.password && <span>{error.password}</span>}
+            {!isAccFound && (
+              <span className="not-found-span">Invalid email or password</span>
+            )}
 
             <button onClick={handleSubmit} className="submit" type="submit">
               Login
