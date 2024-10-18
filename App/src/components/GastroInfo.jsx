@@ -1,5 +1,6 @@
 import "./GastroInfo.css";
 import gastroTextImg from "../assets/cooltext465393048707419.png";
+import { logout } from "./Authentication";
 
 export const GastroInfo = () => {
   return (
