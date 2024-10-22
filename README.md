@@ -17,6 +17,11 @@ GastroBeast is a web-based application that allows users to explore, review, and
 
 
 
+
+![image](https://github.com/user-attachments/assets/0f87c8a1-19b3-48b1-b34c-5f773d5dec68)
+
+
+
 ## Features
 
 - **Browse Restaurants**: View restaurants by categories, star ratings, and detailed descriptions.
