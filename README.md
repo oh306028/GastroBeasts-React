@@ -4,10 +4,11 @@
 
 GastroBeast is a web-based application that allows users to explore, review, and manage restaurant information. Built with a **React** frontend and a **RESTful API** backend, GastroBeast provides an intuitive interface for restaurant discovery, category sorting, and user-generated reviews.
 
-![GastroBeast Homepage](screenshot1.png)
-![GastroBeast Review Page](screenshot2.png)
+
 
 ![image](https://github.com/user-attachments/assets/eb4f6ca4-7bbc-4af7-9e53-21507b586b7e)
+
+
 ![image](https://github.com/user-attachments/assets/c45f16cd-4d95-4f6a-9da2-4dc1b0533bf4)
 
 ## Features
